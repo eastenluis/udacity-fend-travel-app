@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Weather Journal</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            href="https://fonts.googleapis.com/css?family=Oswald:400,600,700|Ranga:400,700&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+
+    <body>
+        <div id="app">
+            <header class="headline">Travel Planner</header>
+            <form
+                id="travel-form"
+                name="travel-form"
+                class="travel-form"
+            >
+                <div class="form-control zip">
+                    <label for="zip">Enter your travel destination (e.g. place name, zip codes) here:</label>
+                    <input
+                        type="text"
+                        id="location"
+                        placeholder="E.g. city name, zip codes"
+                    />
+                </div>
+                <button id="add-trip" type="submit">Add New Trip</button>
+            </form>
+            <div class="travel-entries">
+                <div class="title">Recent Trips</div>
+                <div id="entryHolder">
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,11 @@
+.travel-entries {
+    grid-area: entries;
+    padding: 10px;
+    margin-top: 15px;
+
+    .title {
+        font-weight: bold;
+        font-size: 1.2em;
+        margin-bottom: 10px;
+    }
+}

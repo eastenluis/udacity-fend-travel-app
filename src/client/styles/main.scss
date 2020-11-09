@@ -1,0 +1,23 @@
+html, body {
+    background: #ffffff;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    color: #333;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+#app {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.headline {
+    grid-area: header;
+    font-size: 2em;
+    font-weight: bold;
+    margin: 10px 0;
+}
