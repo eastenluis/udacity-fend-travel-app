@@ -1,4 +1,6 @@
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { EnvironmentPlugin } = require('webpack');
+
 const { commonPlugins, commonRules } = require('./webpack.common');
 
 module.exports = {
@@ -22,10 +24,12 @@ module.exports = {
             cleanStaleWebpackAssets: true,
             protectWebpackAssets: false,
         }),
+        new EnvironmentPlugin({ NODE_ENV: 'development' }),
     ],
     devServer: {
         proxy: {
             '/api': 'http://localhost:8081',
+            '/static': 'http://localhost:8081',
         },
     },
 };

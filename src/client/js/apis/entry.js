@@ -7,18 +7,26 @@ export const getSavedEntries = async () => {
 };
 
 export const saveEntry = async ({
-    locationName,
-    coordinates,
-    temperature,
+    name,
+    countryName,
     departureDate,
+    temperature,
+    weatherIcon,
+    weatherDescription,
     imageUrl,
+    latitude,
+    longitude,
 }) => {
     const payload = {
-        locationName,
-        coordinates,
-        temperature,
+        name,
+        countryName,
         departureDate,
+        temperature,
+        weatherIcon,
+        weatherDescription,
         imageUrl,
+        latitude,
+        longitude,
     };
     const response = await fetch('/api/entries', {
         method: 'POST',
@@ -42,6 +50,6 @@ export const deleteEntry = async (id) => {
         method: 'DELETE',
     });
     if (!response.ok) {
-        throw new Error(`HTTP Status: ${response.status}`);
+        throw new Error(`[Travel App Service] HTTP Status: ${response.status}`);
     }
 };

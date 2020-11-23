@@ -20,7 +20,8 @@
     "luxon": "^1.25.0",
     "normalize.css": "^8.0.1",
     "webpack": "^4.42.1",
-    "webpack-cli": "^3.3.11"
+    "webpack-cli": "^3.3.11",
+    "workbox-webpack-plugin": "^5.1.4"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",

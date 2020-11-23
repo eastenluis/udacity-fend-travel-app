@@ -11,7 +11,7 @@ export const getPictureForPlace = async (place) => {
     const url = `${PIXABAY_API_BASE}?${params}`;
     const response = await fetch(url);
     if (!response.ok) {
-        throw new Error(`HTTP Status: ${response.status}`);
+        throw new Error(`[Pixabay] HTTP Status: ${response.status}`);
     }
 
     const results = await response.json();

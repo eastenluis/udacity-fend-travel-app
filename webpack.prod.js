@@ -1,3 +1,5 @@
+const { GenerateSW } = require('workbox-webpack-plugin');
+const { EnvironmentPlugin } = require('webpack');
 const { commonPlugins, commonRules } = require('./webpack.common');
 
 module.exports = {
@@ -10,5 +12,7 @@ module.exports = {
     },
     plugins: [
         ...commonPlugins,
+        new EnvironmentPlugin({ NODE_ENV: 'production' }),
+        new GenerateSW(),
     ],
 };

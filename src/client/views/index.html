@@ -18,20 +18,26 @@
                 name="travel-form"
                 class="travel-form"
             >
-                <div class="form-control zip">
-                    <label for="zip">Enter your travel destination (e.g. place name, zip codes) here:</label>
+                <div class="form-control">
+                    <label for="location">Travel Destination</label>
                     <input
                         type="text"
                         id="location"
+                        name="location"
                         placeholder="E.g. city name, zip codes"
                     />
                 </div>
-                <button id="add-trip" type="submit">Add New Trip</button>
+                <div class="form-control">
+                    <label for="departure">Departure Date</label>
+                    <input type="date" id="departure" name="departure" />
+                </div>
+                <div class="form-button-group">
+                    <button id="add-trip" type="submit">Add New Trip</button>
+                </div>
             </form>
             <div class="travel-entries">
                 <div class="title">Recent Trips</div>
-                <div id="entryHolder">
-                </div>
+                <div id="entry-holder"></div>
             </div>
         </div>
     </body>

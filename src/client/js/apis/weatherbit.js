@@ -18,7 +18,7 @@ export const getRecentWeatherForecast = async (latitude, longitude, daysLater) =
     const url = `${WEATHERBIT_API_BASE}/forecast/daily?${params}`;
     const response = await fetch(url);
     if (!response.ok) {
-        throw new Error(`HTTP Status: ${response.status}`);
+        throw new Error(`[Weatherbit] HTTP Status: ${response.status}`);
     }
 
     const result = await response.json();
@@ -52,7 +52,7 @@ export const getPredictedWeatherFromHistoricalData = async (latitude, longitude,
     const response = fetch(url);
 
     if (!response.ok) {
-        throw new Error(`HTTP Status: ${response.status}`);
+        throw new Error(`Weatherbit: HTTP Status: ${response.status}`);
     }
 
     const result = await response.json();
