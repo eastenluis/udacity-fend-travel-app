@@ -38,9 +38,13 @@ const getNewEntryId = () => {
     return projectData.entryId;
 };
 const requiredFields = [
-    'locationName',
-    'coordinates',
+    'name',
+    'countryName',
+    'latitude',
+    'longitude',
     'temperature',
+    'weatherIcon',
+    'weatherDescription',
     'departureDate',
     'imageUrl',
 ];
@@ -52,18 +56,26 @@ app.post('/api/entries', (req, res) => {
         }
     }
     const {
-        locationName,
-        coordinates,
+        name,
+        countryName,
+        latitude,
+        longitude,
         temperature,
+        weatherIcon,
+        weatherDescription,
         departureDate,
         imageUrl,
     } = req.body;
 
     const newEntry = {
         id: getNewEntryId(),
-        locationName,
-        coordinates,
+        name,
+        countryName,
+        latitude,
+        longitude,
         temperature,
+        weatherIcon,
+        weatherDescription,
         departureDate,
         imageUrl,
     };
@@ -89,6 +101,7 @@ app.delete('/api/entries/:entryId', (req, res) => {
 
 // Static web path
 app.use(express.static('dist'));
+app.use('/static', express.static('static'));
 app.get('/', (req, res) => {
     res.sendFile('/index.html');
 });
