@@ -50,7 +50,7 @@ const requiredFields = [
 ];
 app.post('/api/entries', (req, res) => {
     for (const field of requiredFields) {
-        if (!req.body || !req.body[field]) {
+        if (!req.body || req.body[field] === null || req.body[field] === undefined) {
             res.status(400).send(`Missing required field: "${field}"`);
             return;
         }
@@ -89,7 +89,9 @@ app.post('/api/entries', (req, res) => {
  */
 app.delete('/api/entries/:entryId', (req, res) => {
     const { entryId } = req.params;
-    const index = projectData.entries.findIndex((entry) => entry.id === entryId);
+    const targetId = Number(entryId);
+
+    const index = projectData.entries.findIndex((entry) => entry.id === targetId);
     if (index < 0) {
         res.status('404').end();
         return;

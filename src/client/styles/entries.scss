@@ -3,6 +3,7 @@
     padding: 10px 0;
 
     .title {
+        color: #2B5F75;
         font-weight: bold;
         font-size: 1.2em;
         margin-bottom: 10px;
@@ -16,13 +17,14 @@
 }
 
 .trip-entry {
-    border: 1px solid #666;
+    border: 1px solid #2B5F75;
+    border-radius: 10px;
+    overflow: hidden;
 
     .trip-image-container {
         overflow: hidden;
 
         img {
-            border-radius: 3px;
             max-width: 100%;
             height: auto;
         }
@@ -56,11 +58,18 @@
     .trip-button-group {
         display: flex;
         justify-content: flex-end;
+        margin: 10px 10px 14px;
 
-        .remove-trip {
-            border: 0 none;
+        button.remove-trip {
+            color: #2B5F75;
             background: transparent;
+            border: 0 none;
+            cursor: pointer;
             text-decoration: underline;
+
+            &:hover {
+                color: #000;
+            }
         }
     }
 }

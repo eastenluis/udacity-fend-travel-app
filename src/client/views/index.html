@@ -31,12 +31,15 @@
                     <label for="departure">Departure Date</label>
                     <input type="date" id="departure" name="departure" />
                 </div>
-                <div class="form-button-group">
-                    <button id="add-trip" type="submit">Add New Trip</button>
+                <div class="form-footer">
+                    <div id="form-error-message"></div>
+                    <div class="form-button-group">
+                        <button id="add-trip" type="submit">Add New Trip</button>
+                    </div>
                 </div>
             </form>
             <div class="travel-entries">
-                <div class="title">Recent Trips</div>
+                <div class="title">Upcoming Trips</div>
                 <div id="entry-holder"></div>
             </div>
         </div>

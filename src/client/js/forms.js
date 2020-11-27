@@ -1,13 +1,19 @@
 import { DateTime } from 'luxon';
 
-import { saveEntry } from './apis/entry'
+import { saveEntry } from './apis/entry';
 import { findGeocodesByPlaceName } from './apis/geonames';
 import { getPredictedWeatherFromHistoricalData, getRecentWeatherForecast } from './apis/weatherbit';
 import { getPictureForPlace } from './apis/pixabay';
-import { appendNewTrip } from './tripPreview'
+import { appendNewTrip } from './tripPreview';
 
-const showError = (error) => {
-    console.error(error);
+const showError = (errorMessage) => {
+    const errorMessageElement = document.getElementById('form-error-message');
+    errorMessageElement.innerText = errorMessage;
+};
+
+const clearError = () => {
+    const errorMessageElement = document.getElementById('form-error-message');
+    errorMessageElement.innerText = '';
 };
 
 /**
@@ -39,6 +45,8 @@ const saveAndUpdateWeatherEntry = async (newEntry) => {
 
 const addTripFormHandler = async (event) => {
     event.preventDefault();
+    clearError();
+
     const formData = new FormData(event.target);
     try {
         const { location, departureDate } = validateFormData(formData);
@@ -80,6 +88,7 @@ const addTripFormHandler = async (event) => {
             weatherDescription: weather.weather.description,
             imageUrl: photo ? photo.webformatURL : null,
         });
+        event.target.reset();
     } catch (e) {
         showError(e.message);
     }
@@ -88,4 +97,7 @@ const addTripFormHandler = async (event) => {
 export const registerFormHandlers = () => {
     const travelForm = document.getElementById('travel-form');
     travelForm.addEventListener('submit', addTripFormHandler);
+    // Set the earlier start date to be today.
+    const departureDateInput = document.getElementById('departure');
+    departureDateInput.setAttribute('min', DateTime.local().toFormat('yyyy-MM-dd'));
 };

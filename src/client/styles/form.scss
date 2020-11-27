@@ -1,11 +1,20 @@
 .travel-form {
-    border: 1px dashed #666;
+    border: 1px dashed #2B5F75;
     padding: 10px;
     max-width: 500px;
 
-    .form-button-group {
+    .form-footer {
         display: flex;
-        justify-content: flex-end;
+        align-items: center;
+    }
+
+    #form-error-message {
+        color: #CB1B45;
+        flex: 1 1 auto;
+    }
+
+    .form-button-group {
+        flex: 0 0 auto;
 
         button {
             cursor: pointer;

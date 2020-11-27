@@ -2,6 +2,15 @@ import { DateTime } from 'luxon';
 
 import { getSavedEntries, deleteEntry } from './apis/entry';
 
+const createImageContainer = (imageUrl) => {
+    const imageContainer = document.createElement('div');
+    imageContainer.classList.add('trip-image-container');
+    const tripImage = document.createElement('img');
+    tripImage.src = imageUrl;
+    imageContainer.appendChild(tripImage);
+    return imageContainer;
+};
+
 const createDepartureElement = (departureDateString) => {
     const departureDate = DateTime.fromISO(departureDateString);
     const daysAway = departureDate.diffNow(['day', 'second']).get('days');
@@ -17,7 +26,7 @@ const createWeatherElement = (temperature, weatherDescription, weatherIcon) => {
     const weatherElement = document.createElement('div');
     weatherElement.classList.add('trip-weather');
     const weatherTextElement = document.createElement('span');
-    weatherTextElement.innerHTML = `Weather Forecast: ${temperature}&#8451;, ${weatherDescription}`;
+    weatherTextElement.innerHTML = `Weather Forecast: <strong>${temperature}&#8451;</strong>, ${weatherDescription}`;
     weatherElement.append(weatherTextElement);
     if (weatherIcon) {
         const weatherIconElement = document.createElement('img');
@@ -25,6 +34,30 @@ const createWeatherElement = (temperature, weatherDescription, weatherIcon) => {
         weatherElement.append(weatherIconElement);
     }
     return weatherElement;
+};
+
+const createLocationElement = (name, countryName) => {
+    const locationElement = document.createElement('div');
+    locationElement.classList.add('trip-location');
+    locationElement.innerText = `${name}, ${countryName}`;
+    return locationElement;
+};
+
+const createButtonGroup = (id) => {
+    const buttonGroup = document.createElement('div');
+    buttonGroup.classList.add('trip-button-group');
+    const removeTripButton = document.createElement('button');
+    removeTripButton.classList.add('remove-trip');
+    removeTripButton.innerText = 'Remove Trip';
+    removeTripButton.addEventListener('click', async (evt) => {
+        evt.preventDefault();
+        await deleteEntry(id);
+        const entryHolder = document.getElementById('entry-holder');
+        const entryElement = document.querySelector(`[data-entry-id="${id}"]`);
+        entryHolder.removeChild(entryElement)
+    });
+    buttonGroup.appendChild(removeTripButton);
+    return buttonGroup;
 };
 
 export const appendNewTrip = ({
@@ -40,7 +73,7 @@ export const appendNewTrip = ({
     /**
      * Template of buttons inserted:
      *
-     *  <div class="trip-entry">
+     *  <div class="trip-entry" data-entry-id="1">
      *      <div class="trip-image-container></div>
      *      <div class="trip-description">
      *          <div class="trip-location"></div>
@@ -54,35 +87,23 @@ export const appendNewTrip = ({
     */
 
     const container = document.createElement('div');
+    container.dataset.entryId = id;
     container.classList.add('trip-entry');
 
-    const imageContainer = document.createElement('div');
-    imageContainer.classList.add('trip-image-container');
-    const tripImage = document.createElement('img');
-    tripImage.src = imageUrl;
-    imageContainer.appendChild(tripImage);
-    container.append(imageContainer);
+    const imageContainer = createImageContainer(imageUrl);
+    container.appendChild(imageContainer);
 
     const descriptionContainer = document.createElement('div');
     descriptionContainer.classList.add('trip-description');
-    const locationElement = document.createElement('div');
-    locationElement.classList.add('trip-location');
-    locationElement.innerText = `${name}, ${countryName}`;
-    descriptionContainer.appendChild(locationElement);
-    const departureElement = createDepartureElement(departureDate);
-    descriptionContainer.appendChild(departureElement);
-    const weatherElement = createWeatherElement(temperature, weatherDescription, weatherIcon);
-    descriptionContainer.appendChild(weatherElement);
-    container.append(descriptionContainer);
+    descriptionContainer.appendChild(createLocationElement(name, countryName));
+    descriptionContainer.appendChild(createDepartureElement(departureDate));
+    descriptionContainer.appendChild(
+        createWeatherElement(temperature, weatherDescription, weatherIcon),
+    );
+    container.appendChild(descriptionContainer);
 
-    const buttonGroup = document.createElement('div');
-    buttonGroup.classList.add('trip-button-group');
-    const removeTripButton = document.createElement('button');
-    removeTripButton.classList.add('remove-trip');
-    removeTripButton.addEventListener('click', async (evt) => {
-        evt.preventDefault();
-        await deleteEntry(id);
-    });
+    const buttonGroup = createButtonGroup(id);
+    container.appendChild(buttonGroup);
 
     const entryHolder = document.getElementById('entry-holder');
     entryHolder.appendChild(container);
