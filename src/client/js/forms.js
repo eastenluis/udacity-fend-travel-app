@@ -43,7 +43,7 @@ const saveAndUpdateWeatherEntry = async (newEntry) => {
     appendNewTrip(savedEntry);
 };
 
-const addTripFormHandler = async (event) => {
+export const addTripFormHandler = async (event) => {
     event.preventDefault();
     clearError();
 
