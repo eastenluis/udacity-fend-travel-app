@@ -29,3 +29,9 @@ used by third party web services:
 
 ### Run local Jest Test
 - Run `npm test` to run client & server tests.
+
+## Extended Options
+- Pull in an image for the country from Pixabay API when the entered location brings up no results.
+- Allow the user to add additional trips.
+- Allow the user to remove the trip.
+- Incorporate icons into forecast.
