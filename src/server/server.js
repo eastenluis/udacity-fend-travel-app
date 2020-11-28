@@ -108,8 +108,12 @@ app.get('/', (req, res) => {
     res.sendFile('/index.html');
 });
 
-// Start listening
-const port = 8081;
-app.listen(port, () => {
-    console.log(`Server running on localhost:${port}`);
-});
+module.exports = app;
+
+if (process.env.NODE_ENV !== 'test') {
+    // Start listening
+    const port = 8081;
+    app.listen(port, () => {
+        console.log(`Server running on localhost:${port}`);
+    });
+}
